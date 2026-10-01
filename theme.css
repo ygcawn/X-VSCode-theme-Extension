@@ -1,0 +1,729 @@
+.x-vscode-mode {
+  --ide-bg: #1e1e1e;
+  --ide-editor: #1e1e1e;
+  --ide-sidebar: #252526;
+  --ide-activity: #333333;
+  --ide-panel: #2d2d30;
+  --ide-border: #3c3c3c;
+  --ide-text: #cccccc;
+  --ide-muted: #8c8c8c;
+  --ide-blue: #007acc;
+  --ide-hover: rgba(255, 255, 255, 0.04);
+}
+
+/* 기본 */
+.x-vscode-mode html,
+.x-vscode-mode body {
+  background: var(--ide-bg) !important;
+  color: var(--ide-text) !important;
+  font-family: "Cascadia Code", Consolas, "Courier New", monospace !important;
+}
+
+.x-vscode-mode body {
+  padding-left: 236px !important;
+  padding-bottom: 160px !important;
+}
+
+.x-vscode-mode * {
+  font-family: "Cascadia Code", Consolas, "Courier New", monospace !important;
+  box-shadow: none !important;
+}
+
+/* 원래 왼쪽 숨김 */
+.x-hide-original-left header[role="banner"] {
+  visibility: hidden !important;
+  pointer-events: none !important;
+  width: 0 !important;
+  min-width: 0 !important;
+  max-width: 0 !important;
+  overflow: hidden !important;
+}
+
+.x-hide-original-left nav[aria-label] {
+  display: none !important;
+}
+
+/* Activity Bar */
+#x-ide-activitybar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 48px;
+  height: calc(100vh - 24px);
+  background: var(--ide-activity);
+  border-right: 1px solid var(--ide-border);
+  z-index: 2147483644;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.x-ide-ab-top,
+.x-ide-ab-bottom {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 8px 0;
+  gap: 8px;
+}
+
+.x-ide-ab-btn {
+  width: 36px;
+  height: 36px;
+  border: none;
+  background: transparent;
+  color: #858585;
+  cursor: pointer;
+  font-size: 18px;
+  border-left: 2px solid transparent;
+}
+
+.x-ide-ab-btn.active {
+  color: #ffffff;
+  border-left: 2px solid #ffffff;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.x-ide-ab-btn:hover {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+/* Explorer */
+#x-ide-explorer {
+  position: fixed;
+  top: 0;
+  left: 48px;
+  width: 188px;
+  height: calc(100vh - 160px);
+  background: var(--ide-sidebar);
+  border-right: 1px solid var(--ide-border);
+  z-index: 2147483643;
+  overflow: auto;
+}
+
+.x-ide-panel-title {
+  height: 35px;
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  font-size: 11px;
+  letter-spacing: 1px;
+  color: var(--ide-text);
+  border-bottom: 1px solid var(--ide-border);
+  background: var(--ide-panel);
+}
+
+.x-ide-section {
+  padding: 8px 0;
+}
+
+.x-ide-section-header {
+  padding: 6px 12px;
+  color: var(--ide-muted);
+  font-size: 11px;
+}
+
+.x-ide-folder,
+.x-ide-file {
+  padding: 6px 12px;
+  font-size: 13px;
+  color: var(--ide-text);
+  border-left: 2px solid transparent;
+}
+
+.x-ide-file.nested {
+  padding-left: 28px;
+}
+
+.x-ide-file.active {
+  background: #37373d;
+  border-left: 2px solid var(--ide-blue);
+}
+
+.x-ide-folder:hover,
+.x-ide-file:hover {
+  background: #2a2d2e;
+}
+
+/* 메인 컬럼 */
+.x-vscode-mode main {
+  background: var(--ide-bg) !important;
+}
+
+.x-vscode-mode div[data-testid="primaryColumn"] {
+  background: var(--ide-editor) !important;
+  border-left: 1px solid var(--ide-border) !important;
+  border-right: 1px solid var(--ide-border) !important;
+  max-width: 860px !important;
+  width: 860px !important;
+  min-width: 860px !important;
+  margin: 0 auto !important;
+}
+
+.x-vscode-mode div[data-testid="primaryColumn"] > div,
+.x-vscode-mode div[data-testid="primaryColumn"] section,
+.x-vscode-mode div[data-testid="primaryColumn"] [data-testid="cellInnerDiv"] {
+  max-width: 860px !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+/* 오른쪽 패널 */
+.x-vscode-mode div[data-testid="sidebarColumn"] {
+  background: var(--ide-sidebar) !important;
+  border-left: 1px solid var(--ide-border) !important;
+}
+
+.x-vscode-mode div[data-testid="sidebarColumn"] section,
+.x-vscode-mode div[data-testid="sidebarColumn"] div[data-testid="trend"] {
+  background: #252526 !important;
+  border: 1px solid var(--ide-border) !important;
+  border-radius: 0 !important;
+}
+
+.x-vscode-mode div[data-testid="sidebarColumn"] section[data-ide-title],
+.x-vscode-mode div[data-testid="sidebarColumn"] div[data-testid="trend"][data-ide-title] {
+  position: relative;
+  padding-top: 28px !important;
+}
+
+.x-vscode-mode div[data-testid="sidebarColumn"] section[data-ide-title]::before,
+.x-vscode-mode div[data-testid="sidebarColumn"] div[data-testid="trend"][data-ide-title]::before {
+  content: attr(data-ide-title);
+  position: absolute;
+  top: 6px;
+  left: 10px;
+  font-size: 11px;
+  letter-spacing: 0.8px;
+  color: var(--ide-muted);
+}
+
+.x-vscode-mode div[data-testid="sidebarColumn"] input {
+  background: #1e1e1e !important;
+  border: 1px solid var(--ide-border) !important;
+  color: var(--ide-text) !important;
+  border-radius: 0 !important;
+}
+
+/* 상단 헤더 */
+.x-vscode-mode header {
+  background: #181818 !important;
+  border-bottom: 1px solid var(--ide-border) !important;
+  backdrop-filter: none !important;
+}
+
+/* 탭 바 */
+#x-ide-toptabs {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  height: 35px;
+  background: #252526;
+  border-bottom: 1px solid var(--ide-border);
+}
+
+.x-ide-tab {
+  height: 35px;
+  min-width: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 0 12px;
+  border-right: 1px solid var(--ide-border);
+  background: #2d2d30;
+  color: #969696 !important;
+  font-size: 12px;
+}
+
+.x-ide-tab.active {
+  background: #1e1e1e;
+  color: #ffffff !important;
+}
+
+.x-ide-tab-close {
+  opacity: 0.65;
+  font-size: 12px;
+}
+
+.x-ide-tab:hover .x-ide-tab-close {
+  opacity: 1;
+}
+
+/* 브레드크럼 */
+#x-ide-editor-header {
+  height: 28px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 16px;
+  background: #1e1e1e;
+  border-bottom: 1px solid #2a2a2a;
+  color: var(--ide-muted);
+  font-size: 12px;
+}
+
+.x-ide-breadcrumb.current {
+  color: #cccccc;
+}
+
+.x-ide-breadcrumb-sep {
+  color: #6a6a6a;
+}
+
+/* 입력창 */
+.x-vscode-mode div[role="textbox"] {
+  background: #1e1e1e !important;
+  border: none !important;
+  border-bottom: 1px solid #2a2a2a !important;
+  border-radius: 0 !important;
+  padding: 8px 0 !important;
+  color: var(--ide-text) !important;
+}
+
+/* 트윗을 코드 줄처럼 */
+.x-vscode-mode article {
+  position: relative !important;
+  background: #1e1e1e !important;
+  border-bottom: 1px solid #2a2a2a !important;
+  padding: 8px 16px 8px 56px !important;
+  margin: 0 !important;
+  min-height: 0 !important;
+  border-radius: 0 !important;
+}
+
+.x-vscode-mode article:hover {
+  background: #232323 !important;
+}
+
+.x-vscode-mode article:hover::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 2px;
+  height: 100%;
+  background: var(--ide-blue);
+}
+
+.x-vscode-mode article > div,
+.x-vscode-mode article section,
+.x-vscode-mode article [data-testid="cellInnerDiv"] {
+  margin: 0 !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  min-height: 0 !important;
+  border-radius: 0 !important;
+}
+
+/* 본문을 강제로 말줄임 삭제하지 않음 */
+.x-vscode-mode article [data-testid="tweetText"] {
+  display: block !important;
+  overflow: visible !important;
+  line-height: 1.35 !important;
+  font-size: 14px !important;
+  margin-top: 2px !important;
+  margin-bottom: 2px !important;
+  white-space: normal !important;
+}
+.x-vscode-mode article header,
+.x-vscode-mode article [role="link"],
+.x-vscode-mode article [data-testid="User-Name"] {
+  margin: 0 !important;
+  padding: 0 !important;
+  line-height: 1.3 !important;
+}
+
+.x-vscode-mode article span,
+.x-vscode-mode article div,
+.x-vscode-mode article a {
+  letter-spacing: 0 !important;
+}
+
+
+/* 줄번호 */
+.x-ide-line-number {
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  width: 28px;
+  text-align: right;
+  color: #858585;
+  font-size: 12px;
+  user-select: none;
+}
+
+/* 숨김 대상 */
+/* media는 이미지가 아니라 블록 전체를 접음 */
+.x-ide-media-block.x-ide-media-collapsed {
+  display: none !important;
+}
+
+.x-ide-media-block.x-ide-media-expanded {
+  display: block !important;
+  margin-top: 6px !important;
+  margin-bottom: 6px !important;
+}
+
+/* 펼쳤을 때 이미지/비디오 표시 */
+.x-ide-media-expanded img,
+.x-ide-media-expanded video,
+.x-ide-media-expanded [data-testid="tweetPhoto"],
+.x-ide-media-expanded [data-testid="videoComponent"] {
+  display: block !important;
+  max-width: 100% !important;
+  border-radius: 0 !important;
+}
+
+/* 액션바 숨김 */
+.x-ide-actions-hidden {
+  display: none !important;
+}
+
+/* badge */
+.x-ide-compact-controls {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-top: 4px;
+  margin-bottom: 2px;
+}
+
+.x-ide-inline-toggle,
+.x-ide-inline-badge {
+  background: transparent !important;
+  color: #7f7f7f !important;
+  border: 1px solid #3c3c3c !important;
+  border-radius: 0 !important;
+  font-size: 12px !important;
+  padding: 2px 8px !important;
+  line-height: 1.4 !important;
+}
+
+.x-ide-inline-toggle {
+  cursor: pointer;
+}
+
+.x-ide-inline-toggle:hover {
+  background: #2d2d30 !important;
+  color: #ffffff !important;
+}
+
+
+.x-ide-force-show {
+  display: block !important;
+}
+
+a.x-ide-force-show {
+  display: block !important;
+}
+
+img.x-ide-force-show,
+video.x-ide-force-show {
+  display: block !important;
+}
+
+/* 토글 바 */
+.x-ide-compact-controls {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-top: 4px;
+  margin-bottom: 2px;
+}
+
+.x-ide-inline-toggle {
+  background: transparent !important;
+  color: #7f7f7f !important;
+  border: 1px solid #3c3c3c !important;
+  border-radius: 0 !important;
+  font-size: 12px !important;
+  padding: 2px 8px !important;
+  cursor: pointer;
+  line-height: 1.4 !important;
+}
+
+.x-ide-inline-toggle:hover {
+  background: #2d2d30 !important;
+  color: #ffffff !important;
+}
+
+/* 펼쳐진 첨부물 */
+.x-ide-force-show img,
+.x-ide-force-show video,
+img.x-ide-force-show,
+video.x-ide-force-show {
+  border: 1px solid #3c3c3c !important;
+  border-radius: 0 !important;
+  margin-top: 6px !important;
+}
+
+/* 버튼/링크 */
+.x-vscode-mode a:hover,
+.x-vscode-mode div[role="button"]:hover,
+.x-vscode-mode button:hover {
+  background: var(--ide-hover) !important;
+}
+
+.x-vscode-mode button {
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+/* 터미널 */
+#x-ide-terminal {
+  position: fixed;
+  left: 48px;
+  bottom: 24px;
+  width: 188px;
+  height: 160px;
+  background: #181818;
+  border-top: 1px solid var(--ide-border);
+  border-right: 1px solid var(--ide-border);
+  z-index: 2147483642;
+  display: flex;
+  flex-direction: column;
+}
+
+.x-ide-terminal-header {
+  height: 30px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 10px;
+  font-size: 11px;
+  color: #9d9d9d;
+  border-bottom: 1px solid #2a2a2a;
+  background: #202020;
+}
+
+.x-ide-terminal-header .active {
+  color: #ffffff;
+}
+
+.x-ide-terminal-body {
+  flex: 1;
+  padding: 8px 10px;
+  font-size: 11px;
+  color: #cccccc;
+  overflow: auto;
+  line-height: 1.55;
+}
+
+.x-ide-terminal-body .prompt {
+  color: #4ec9b0;
+}
+
+/* 상태바 */
+#x-ide-statusbar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 24px;
+  background: var(--ide-blue);
+  color: #ffffff;
+  z-index: 2147483647;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 12px;
+  box-sizing: border-box;
+  font-size: 12px;
+}
+
+#x-ide-statusbar span {
+  color: #ffffff !important;
+  margin-right: 14px;
+}
+
+.x-ide-status-left,
+.x-ide-status-right {
+  display: flex;
+  align-items: center;
+}
+
+/* 밝은 배경 제거 */
+.x-vscode-mode [style*="background-color: rgb(255, 255, 255)"],
+.x-vscode-mode [style*="background-color:white"] {
+  background-color: var(--ide-editor) !important;
+}
+
+/* 좁은 화면 */
+@media (max-width: 1400px) {
+  .x-vscode-mode div[data-testid="primaryColumn"] {
+    max-width: 760px !important;
+    min-width: 760px !important;
+    width: 760px !important;
+  }
+}
+
+@media (max-width: 1200px) {
+  #x-ide-explorer {
+    width: 160px;
+  }
+
+  #x-ide-terminal {
+    width: 160px;
+  }
+
+  .x-vscode-mode body {
+    padding-left: 208px !important;
+  }
+
+  .x-vscode-mode div[data-testid="primaryColumn"] {
+    max-width: 680px !important;
+    min-width: 680px !important;
+    width: 680px !important;
+  }
+}
+
+.x-ide-reply-hidden {
+  display: none !important;
+}
+
+.x-ide-inline-badge {
+  display: inline-flex;
+  align-items: center;
+  background: transparent;
+  color: #7f7f7f;
+  border: 1px solid #3c3c3c;
+  border-radius: 0;
+  font-size: 12px;
+  padding: 2px 8px;
+  line-height: 1.4;
+}
+
+.x-ide-force-show {
+  display: block !important;
+}
+
+/* 프로필 이미지/아바타 숨김 */
+.x-vscode-mode article [data-testid="Tweet-User-Avatar"],
+.x-vscode-mode article [data-testid="UserAvatar-Container"] {
+  display: none !important;
+}
+
+/* 아바타가 사라진 만큼 왼쪽 여백 축소 */
+.x-vscode-mode article {
+  padding: 8px 16px 8px 42px !important;
+}
+
+/* 줄번호 위치도 조금 당김 */
+.x-ide-line-number {
+  left: 8px !important;
+  width: 24px !important;
+}
+
+/* 이름줄 더 조밀하게 */
+.x-vscode-mode article [data-testid="User-Name"] {
+  font-size: 13px !important;
+  line-height: 1.25 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* 본문도 좀 더 코드줄처럼 */
+.x-vscode-mode article [data-testid="tweetText"] {
+  font-size: 14px !important;
+  line-height: 1.35 !important;
+}
+
+/* 사용자 헤더 줄 전체 정리 */
+.x-vscode-mode article [data-testid="User-Name"] {
+  display: flex !important;
+  align-items: center !important;
+  flex-wrap: wrap !important;
+  gap: 6px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  min-height: 0 !important;
+  line-height: 1.2 !important;
+}
+
+/* 이름 */
+.x-vscode-mode article [data-testid="User-Name"] > div:first-child,
+.x-vscode-mode article [data-testid="User-Name"] span {
+  font-size: 13px !important;
+  line-height: 1.2 !important;
+}
+
+/* 아이디 / 시간 / 점 구분자 */
+.x-vscode-mode article time,
+.x-vscode-mode article [href*="/status/"],
+.x-vscode-mode article [data-testid="User-Name"] a,
+.x-vscode-mode article [data-testid="User-Name"] span[dir="ltr"] {
+  font-size: 12px !important;
+  color: #8c8c8c !important;
+  line-height: 1.2 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* 헤더 줄 아래 여백 줄이기 */
+.x-vscode-mode article header,
+.x-vscode-mode article [data-testid="User-Name"] + div,
+.x-vscode-mode article [data-testid="User-Name"] ~ div {
+  margin-top: 0 !important;
+}
+
+/* 본문 시작 간격 조정 */
+.x-vscode-mode article [data-testid="tweetText"] {
+  margin-top: 2px !important;
+}
+
+/* 이름줄 안의 배지/자물쇠 아이콘 너무 크지 않게 */
+.x-vscode-mode article [data-testid="User-Name"] svg {
+  width: 12px !important;
+  height: 12px !important;
+}
+
+/* 줄 전체를 더 코드줄처럼 */
+.x-vscode-mode article {
+  display: block !important;
+}
+
+.x-vscode-mode article [data-testid="User-Name"],
+.x-vscode-mode article [data-testid="tweetText"],
+.x-vscode-mode article .x-ide-compact-controls {
+  max-width: 100% !important;
+}
+
+.x-vscode-mode article .x-ide-userline {
+  display: flex !important;
+  align-items: center !important;
+  flex-wrap: wrap !important;
+  gap: 6px !important;
+  line-height: 1.2 !important;
+}
+
+.x-ide-media-section {
+  margin-top: 6px;
+  margin-bottom: 4px;
+}
+
+.x-ide-media-section.collapsed {
+  display: none !important;
+}
+
+.x-ide-media-section.expanded {
+  display: block !important;
+}
+
+.x-ide-media-body {
+  display: block;
+}
+
+.x-ide-media-body img,
+.x-ide-media-body video,
+.x-ide-media-body [data-testid="tweetPhoto"],
+.x-ide-media-body [data-testid="videoComponent"] {
+  display: block !important;
+  max-width: 100% !important;
+  border: 1px solid #3c3c3c !important;
+  border-radius: 0 !important;
+  margin-top: 6px !important;
+}
