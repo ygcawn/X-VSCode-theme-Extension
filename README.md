@@ -8,3 +8,4 @@ v2.4 — Navigation & UI Improvements
 - Removed stray DEBUG CONSOLE text
 - Improved Explorer, Terminal, and sidebar layout
 - Refined the overall UI to better resemble VS Code
+- Media hide delay stabilization
